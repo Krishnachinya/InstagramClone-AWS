@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download and List Files</title>
+</head>
+<body>
+
+<p>Time taken to fetch all the files are {{ result }}</p>
+<p> Printing all the files in database </p>
+
+<table border="1">
+    <tr>
+    <td>FileName</td>
+    <td>Image</td>
+
+    {% for key, value in result2.iteritems() %}
+    {% if key%2 == 0 %}
+    <tr>
+    {% endif %}
+     {% if key%2 == 1 %}
+     <td> <a href="/displayimgdetails?filename={{ value }}"> <img src="{{ url_for('static',filename=value) }}" name="image" align="center" height="80" width="80" ></a> </td>
+     {% else %}
+        <td> {{ value }} </td>
+    {% endif %}
+    {% endfor %}
+</table>
+
+<p> Enter the filename to download</p>
+     <form action="/downloadfile" method="get">
+        <input type="text" name="filename"/>
+        <input type="submit" value="submit">
+    </form>
+
+</body>
+</html>
